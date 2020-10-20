@@ -3,9 +3,28 @@
   max-width: 1360px;
   box-sizing: border-box;
   padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.table-wrapper {
-  width: 350px;
+.header {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  align-items: center;
+}
+
+.title {
+  font-size: 7em;
+}
+
+.table-wrapper--main-data {
+  width: 80%;
   height: 80vh;
+}
+
+.table-wrapper--dist-freq {
+  width: 70%;
+  height: 70vh;
 }
