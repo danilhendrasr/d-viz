@@ -2,7 +2,7 @@ import Head from "next/head"
 import styles from "@/styles/Home.module.css"
 import { useState } from "react"
 import { DataGrid, ColDef } from "@material-ui/data-grid"
-import { GetServerSideProps } from "next"
+import { GetStaticProps } from "next"
 import {
   getMean,
   getMode,
@@ -52,7 +52,6 @@ const distFreqCols: ColDef[] = [
 ]
 
 export default function Home({ records, recordValues, freqDist }: HomeProps) {
-  console.log(freqDist)
   const [data] = useState(records)
   const mean = getMean(recordValues)
   const { nilaiModus: modus, banyakMuncul: frekuensiModus } = getMode(
@@ -61,23 +60,30 @@ export default function Home({ records, recordValues, freqDist }: HomeProps) {
   const median = getMedian(recordValues)
 
   return (
-    <div className={styles.container}>
+    <div className={styles["container"]}>
       <Head>
         <title>Visualisasi Data</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Visualisasi Data</h1>
-          <h2>Danil Hendra Suryawan</h2>
-          <h3>19081010016</h3>
-          <h4>Statistika Komputasi (D)</h4>
+      <header className={styles["header"]}>
+        <div className={styles["text-center"]}>
+          <h1 className={`${styles["title"]} ${styles["text-center"]}`}>
+            Visualisasi Data
+          </h1>
+          <h2 className={`${styles["subtitle"]} ${styles["subtitle--main"]}`}>
+            Danil Hendra Suryawan
+          </h2>
+          <h3
+            className={`${styles["subtitle"]} ${styles["subtitle--secondary"]}`}
+          >
+            19081010016
+          </h3>
         </div>
       </header>
 
       <div className={styles["table-wrapper--main-data"]}>
-        <DataGrid rows={data} columns={mainDataCols} pageSize={7} />
+        <DataGrid rows={data} columns={mainDataCols} pageSize={10} />
       </div>
 
       <h2>Mean: {mean}</h2>
@@ -93,7 +99,7 @@ export default function Home({ records, recordValues, freqDist }: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const records = await getData()
   const recordValues = extractValuesFromRecords(records)
   const freqTable = getFrequencyTableFromRecordValues(recordValues)
