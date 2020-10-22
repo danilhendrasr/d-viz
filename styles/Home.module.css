@@ -27,21 +27,28 @@
 }
 
 .subtitle--main {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .subtitle--secondary {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .table-wrapper--main-data {
   width: 95%;
   max-width: 800px;
   height: 630px;
+  margin-bottom: 30px;
 }
 
 .table-wrapper--dist-freq {
   width: 70%;
+  height: 370px;
+  margin: 30px 0;
+}
+
+.table-wrapper--relative-dist-freq {
+  width: 600px;
   height: 370px;
 }
 
