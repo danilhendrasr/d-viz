@@ -3,7 +3,7 @@ import { NormalFreqDistData } from "../freq-dist-tables/Normal"
 
 const PieChartVisualization = () => {
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={350}>
       <PieChart>
         <Pie
           data={NormalFreqDistData}
@@ -11,7 +11,8 @@ const PieChartVisualization = () => {
           nameKey="interval"
           cx="50%"
           cy="50%"
-          outerRadius={50}
+          outerRadius={40}
+          label
           fill="#5D737E"
         />
         <Pie
@@ -20,8 +21,9 @@ const PieChartVisualization = () => {
           nameKey="interval"
           cx="50%"
           cy="50%"
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={90}
+          outerRadius={120}
+          label
           fill="#000"
         />
         <Legend
