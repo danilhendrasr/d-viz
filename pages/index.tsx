@@ -3,15 +3,20 @@ import styles from "@/styles/Home.module.css"
 import { useState } from "react"
 import { GetStaticProps } from "next"
 import { DataGrid, ColDef } from "@material-ui/data-grid"
+import { LineChart, BarChart, PieChart } from "@/components/charts"
+import { CumulativeTable, BasicTable } from "@/components/freq-dist-tables"
+import { Tabs } from "antd"
 import {
   getMean,
   getMode,
-  getMedian,
   getData,
-  extractValuesFromRecords,
+  getMedian,
   getFreqDistObject,
+  extractValuesFromRecords,
   getFrequencyTableFromRecordValues,
 } from "@/utils"
+
+const { TabPane } = Tabs
 
 interface FilteredRecord {
   id: number
@@ -21,29 +26,9 @@ interface FilteredRecord {
   data: number
 }
 
-interface DistFreqRow {
-  id: number
-  nomor: number
-  interval: string
-  frekuensi: number
-  tepiBawah: number
-  tepiAtas: number
-  nilaiTengah: number
-}
-
-interface RelativeFreqDistRow {
-  id: number
-  nomor: number
-  interval: string
-  frekuensi: number
-  persentase: string
-}
-
 interface HomeProps {
   records: FilteredRecord[]
   recordValues: number[]
-  freqDist: DistFreqRow[]
-  relativeFreqDist: RelativeFreqDistRow[]
 }
 
 const mainDataCols: ColDef[] = [
@@ -53,29 +38,7 @@ const mainDataCols: ColDef[] = [
   { field: "data", headerName: "Biaya Internet", width: 150 },
 ]
 
-const distFreqCols: ColDef[] = [
-  { field: "nomor", headerName: "Nomor" },
-  { field: "interval", headerName: "Interval Kelas (Ribu)", width: 200 },
-  { field: "frekuensi", headerName: "Frekuensi" },
-  { field: "tepiBawah", headerName: "Tepi Bawah", width: 150 },
-  { field: "tepiAtas", headerName: "Tepi Atas", width: 150 },
-  { field: "nilaiTengah", headerName: "Nilai Tengah", width: 150 },
-]
-
-const relativeFreqDistCols: ColDef[] = [
-  { field: "nomor", headerName: "Nomor" },
-  { field: "interval", headerName: "Interval Kelas (Ribu)", width: 200 },
-  { field: "frekuensi", headerName: "Frekuensi" },
-  { field: "persentase", headerName: "Persentase", width: 150 },
-]
-
-export default function Home({
-  records,
-  recordValues,
-  freqDist,
-  relativeFreqDist,
-}: HomeProps) {
-  console.log(relativeFreqDist)
+export default function Home({ records, recordValues }: HomeProps) {
   const [data] = useState(records)
   const mean = getMean(recordValues)
   const { nilaiModus: modus, banyakMuncul: frekuensiModus } = getMode(
@@ -116,17 +79,35 @@ export default function Home({
       </h2>
       <h2>Median: {median}</h2>
 
-      <div className={styles["table-wrapper--dist-freq"]}>
-        <DataGrid rows={freqDist} columns={distFreqCols} pageSize={10} />
-      </div>
-
-      <div className={styles["table-wrapper--relative-dist-freq"]}>
-        <DataGrid
-          rows={relativeFreqDist}
-          columns={relativeFreqDistCols}
-          pageSize={5}
-        />
-      </div>
+      <Tabs
+        defaultActiveKey="1"
+        onChange={(key) => console.log(key)}
+        tabPosition="left"
+        style={{ width: "100%" }}
+        tabBarStyle={{ fontSize: "20px" }}
+      >
+        <TabPane tab="Basic" key="1" style={{ width: "100%" }}>
+          <div style={{ margin: "20px 0" }}>
+            <BasicTable />
+          </div>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
+          >
+            <div style={{ margin: "20px 10px", fontSize: "13px" }}>
+              <LineChart />
+            </div>
+            <div style={{ margin: "20px 10px", fontSize: "13px" }}>
+              <PieChart />
+            </div>
+            <div style={{ margin: "20px 10px", fontSize: "11px" }}>
+              <BarChart />
+            </div>
+          </div>
+        </TabPane>
+        <TabPane tab="Kumulatif" key="2">
+          <CumulativeTable />
+        </TabPane>
+      </Tabs>
     </div>
   )
 }
@@ -137,32 +118,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const freqTable = getFrequencyTableFromRecordValues(recordValues)
 
   const freqDistObj = getFreqDistObject(freqTable)
-  const relativeFreqDist = getRelativeFreqDistObject(freqDistObj)
 
   return {
     props: {
       records: records,
       recordValues: recordValues,
       freqDist: freqDistObj,
-      relativeFreqDist,
     },
   }
-}
-
-function getRelativeFreqDistObject(
-  freqDistObj: DistFreqRow[]
-): RelativeFreqDistRow[] {
-  let relativeFreqDistObj: RelativeFreqDistRow[] = []
-
-  freqDistObj.forEach((row, index) => {
-    relativeFreqDistObj.push({
-      id: index,
-      nomor: index + 1,
-      interval: row.interval,
-      frekuensi: row.frekuensi,
-      persentase: `${(row.frekuensi / 50) * 100}%`,
-    })
-  })
-
-  return relativeFreqDistObj
 }
