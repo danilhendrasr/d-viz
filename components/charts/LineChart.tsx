@@ -17,7 +17,7 @@ const LineChartVisualization = () => {
         <Line type="monotone" dataKey="frekuensi" stroke="#5D737E" />
         <Line type="monotone" dataKey="persentase" stroke="#000" />
         <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-        <XAxis dataKey="interval" interval={0} allowDataOverflow />
+        <XAxis dataKey="interval" allowDataOverflow />
         <YAxis />
         <Tooltip />
         <Legend
