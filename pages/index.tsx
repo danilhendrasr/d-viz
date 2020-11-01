@@ -56,7 +56,7 @@ export default function Home({ records, recordValues }: HomeProps) {
       <header className={styles["header"]}>
         <div className={styles["text-center"]}>
           <h1 className={`${styles["title"]} ${styles["text-center"]}`}>
-            Visualisasi Data
+            Statistika Komputasi (Visualisasi Data)
           </h1>
           <h2 className={`${styles["subtitle"]} ${styles["subtitle--main"]}`}>
             Danil Hendra Suryawan
@@ -79,33 +79,49 @@ export default function Home({ records, recordValues }: HomeProps) {
       </h2>
       <h2>Median: {median}</h2>
 
+      <h2 style={{ textAlign: "center", fontSize: "2.5em" }}>
+        Tabel Distribusi Frekuensi dan Visualisasinya
+      </h2>
       <Tabs
         defaultActiveKey="1"
         onChange={(key) => console.log(key)}
-        tabPosition="left"
-        style={{ width: "100%" }}
+        style={{ width: "85%" }}
         tabBarStyle={{ fontSize: "20px" }}
+        size="large"
+        centered
       >
-        <TabPane tab="Basic" key="1" style={{ width: "100%" }}>
+        <TabPane tab="Normal & Relatif" key="1" style={{ width: "100%" }}>
           <div style={{ margin: "20px 0" }}>
             <BasicTable />
           </div>
-          <div
-            style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
-          >
-            <div style={{ margin: "20px 10px", fontSize: "13px" }}>
-              <LineChart />
-            </div>
-            <div style={{ margin: "20px 10px", fontSize: "13px" }}>
-              <PieChart />
-            </div>
-            <div style={{ margin: "20px 10px", fontSize: "11px" }}>
-              <BarChart />
-            </div>
+          <hr />
+          <div style={{ marginTop: "30px" }}>
+            <h3 style={{ textAlign: "center", fontSize: "2.2em" }}>
+              Visualisasi Tabel Distribusi Frekuensi
+            </h3>
+            <Tabs defaultActiveKey="1" centered>
+              <TabPane tab="Diagram Balok" key="1">
+                <BarChart />
+              </TabPane>
+              <TabPane tab="Diagram Lingkaran" key="2">
+                <PieChart />
+              </TabPane>
+              <TabPane tab="Diagram Ogive" key="3">
+                <LineChart />
+              </TabPane>
+            </Tabs>
           </div>
         </TabPane>
-        <TabPane tab="Kumulatif" key="2">
+        <TabPane tab="Kumulatif & Relatif-Kumulatif" key="2">
           <CumulativeTable />
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="Test" key="1">
+              <h1>Test</h1>
+            </TabPane>
+            <TabPane tab="Testo" key="2">
+              <h1>Testo</h1>
+            </TabPane>
+          </Tabs>
         </TabPane>
       </Tabs>
     </div>
