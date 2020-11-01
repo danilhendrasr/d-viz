@@ -75,18 +75,7 @@ const data: DataShape[] = [
 ]
 
 const NormalFreqDistTable: React.FC = () => {
-  return (
-    <Table
-      bordered
-      dataSource={data}
-      columns={columns}
-      title={() => (
-        <strong style={{ fontSize: "1.5em" }}>
-          Tabel Distribusi Frekuensi
-        </strong>
-      )}
-    />
-  )
+  return <Table bordered dataSource={data} columns={columns} />
 }
 
 export { NormalFreqDistTable, data as NormalFreqDistData }

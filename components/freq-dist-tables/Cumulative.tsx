@@ -66,7 +66,7 @@ const data: DataShape[] = [
   {
     key: 1,
     kelasKurangDari: 200000.5,
-    frekuensiKurangDari: 19,
+    frekuensiKurangDari: 35,
     persentasiFrekKurangDari: 70,
     kelasLebihDari: 100000.5,
     frekuensiLebihDari: 31,
@@ -75,7 +75,7 @@ const data: DataShape[] = [
   {
     key: 1,
     kelasKurangDari: 300000.5,
-    frekuensiKurangDari: 19,
+    frekuensiKurangDari: 39,
     persentasiFrekKurangDari: 78,
     kelasLebihDari: 200000.5,
     frekuensiLebihDari: 15,
@@ -84,7 +84,7 @@ const data: DataShape[] = [
   {
     key: 1,
     kelasKurangDari: 400000.5,
-    frekuensiKurangDari: 19,
+    frekuensiKurangDari: 48,
     persentasiFrekKurangDari: 96,
     kelasLebihDari: 300000.5,
     frekuensiLebihDari: 11,
@@ -93,7 +93,7 @@ const data: DataShape[] = [
   {
     key: 1,
     kelasKurangDari: 500000.5,
-    frekuensiKurangDari: 19,
+    frekuensiKurangDari: 50,
     persentasiFrekKurangDari: 100,
     kelasLebihDari: 400000.5,
     frekuensiLebihDari: 2,
@@ -102,19 +102,7 @@ const data: DataShape[] = [
 ]
 
 const CumulativeFreqDistTable = () => {
-  return (
-    <Table
-      bordered
-      dataSource={data}
-      columns={columns}
-      title={() => (
-        <strong style={{ fontSize: "1.5em" }}>
-          Tabel Distribusi Frekuensi Kumulatif
-        </strong>
-      )}
-      style={{ margin: "10px 0" }}
-    />
-  )
+  return <Table bordered dataSource={data} columns={columns} />
 }
 
 export { CumulativeFreqDistTable }
