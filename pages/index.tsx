@@ -11,10 +11,10 @@ import {
   getMode,
   getData,
   getMedian,
-  getFreqDistObject,
   extractValuesFromRecords,
-  getFrequencyTableFromRecordValues,
 } from "@/utils"
+import { NormalFreqDistData } from "@/components/freq-dist-tables/Normal"
+import { CumulativeFreqDistData } from "@/components/freq-dist-tables/Cumulative"
 
 const { TabPane } = Tabs
 
@@ -82,14 +82,7 @@ export default function Home({ records, recordValues }: HomeProps) {
       <h2 style={{ textAlign: "center", fontSize: "2.5em" }}>
         Tabel Distribusi Frekuensi dan Visualisasinya
       </h2>
-      <Tabs
-        defaultActiveKey="1"
-        onChange={(key) => console.log(key)}
-        style={{ width: "85%" }}
-        tabBarStyle={{ fontSize: "20px" }}
-        size="large"
-        centered
-      >
+      <Tabs defaultActiveKey="1" style={{ width: "85%" }} size="large" centered>
         <TabPane tab="Normal & Relatif" key="1" style={{ width: "100%" }}>
           <div style={{ margin: "20px 0" }}>
             <BasicTable />
@@ -97,11 +90,16 @@ export default function Home({ records, recordValues }: HomeProps) {
           <hr />
           <div style={{ marginTop: "30px" }}>
             <h3 style={{ textAlign: "center", fontSize: "2.2em" }}>
-              Visualisasi Tabel Distribusi Frekuensi
+              Visualisasi Distribusi Frekuensi
             </h3>
-            <Tabs defaultActiveKey="1" centered>
+            <Tabs defaultActiveKey="1" centered size="small">
               <TabPane tab="Diagram Balok" key="1">
-                <BarChart />
+                <BarChart
+                  data={NormalFreqDistData}
+                  xAxisKeyName="interval"
+                  barDataKeys={["frekuensi", "persentase"]}
+                  labels={["Frekuensi", "Persentase"]}
+                />
               </TabPane>
               <TabPane tab="Diagram Lingkaran" key="2">
                 <PieChart />
@@ -114,14 +112,44 @@ export default function Home({ records, recordValues }: HomeProps) {
         </TabPane>
         <TabPane tab="Kumulatif & Relatif-Kumulatif" key="2">
           <CumulativeTable />
-          <Tabs defaultActiveKey="1">
-            <TabPane tab="Test" key="1">
-              <h1>Test</h1>
-            </TabPane>
-            <TabPane tab="Testo" key="2">
-              <h1>Testo</h1>
-            </TabPane>
-          </Tabs>
+          <hr />
+          <div>
+            <h3 style={{ textAlign: "center", fontSize: "2.2em" }}>
+              Visualisasi Distribusi Frekuensi Kumulatif
+            </h3>
+            <Tabs defaultActiveKey="1" centered>
+              <TabPane tab="Kurang dari" key="1">
+                <Tabs defaultActiveKey="1" tabPosition="left">
+                  <TabPane tab="Diagram Balok" key="1">
+                    <BarChart
+                      data={CumulativeFreqDistData}
+                      xAxisKeyName="kelasKurangDari"
+                      barDataKeys={[
+                        "frekuensiKurangDari",
+                        "persentasiFrekKurangDari",
+                      ]}
+                      labels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
+                </Tabs>
+              </TabPane>
+              <TabPane tab="Lebih dari" key="2">
+                <Tabs defaultActiveKey="1" tabPosition="left">
+                  <TabPane tab="Diagram Balok" key="1">
+                    <BarChart
+                      data={CumulativeFreqDistData}
+                      xAxisKeyName="kelasLebihDari"
+                      barDataKeys={[
+                        "frekuensiLebihDari",
+                        "persentasiFrekLebihDari",
+                      ]}
+                      labels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
+                </Tabs>
+              </TabPane>
+            </Tabs>
+          </div>
         </TabPane>
       </Tabs>
     </div>
@@ -131,15 +159,11 @@ export default function Home({ records, recordValues }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const records = await getData()
   const recordValues = extractValuesFromRecords(records)
-  const freqTable = getFrequencyTableFromRecordValues(recordValues)
-
-  const freqDistObj = getFreqDistObject(freqTable)
 
   return {
     props: {
       records: records,
       recordValues: recordValues,
-      freqDist: freqDistObj,
     },
   }
 }
