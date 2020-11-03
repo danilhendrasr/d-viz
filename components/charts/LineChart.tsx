@@ -1,4 +1,3 @@
-import { NormalFreqDistData } from "../freq-dist-tables/Normal"
 import {
   LineChart,
   Line,
