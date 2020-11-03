@@ -105,7 +105,12 @@ export default function Home({ records, recordValues }: HomeProps) {
                 <PieChart />
               </TabPane>
               <TabPane tab="Diagram Ogive" key="3">
-                <LineChart />
+                <LineChart
+                  data={NormalFreqDistData}
+                  xAxisKeyName="interval"
+                  lineDataKeys={["frekuensi", "persentase"]}
+                  labels={["Frekuensi", "Persentase"]}
+                />
               </TabPane>
             </Tabs>
           </div>
@@ -131,6 +136,17 @@ export default function Home({ records, recordValues }: HomeProps) {
                       labels={["Frekuensi", "Persentase"]}
                     />
                   </TabPane>
+                  <TabPane tab="Diagram Ogive" key="3">
+                    <LineChart
+                      data={CumulativeFreqDistData}
+                      xAxisKeyName="kelasKurangDari"
+                      lineDataKeys={[
+                        "frekuensiKurangDari",
+                        "persentasiFrekKurangDari",
+                      ]}
+                      labels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
                 </Tabs>
               </TabPane>
               <TabPane tab="Lebih dari" key="2">
@@ -140,6 +156,17 @@ export default function Home({ records, recordValues }: HomeProps) {
                       data={CumulativeFreqDistData}
                       xAxisKeyName="kelasLebihDari"
                       barDataKeys={[
+                        "frekuensiLebihDari",
+                        "persentasiFrekLebihDari",
+                      ]}
+                      labels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
+                  <TabPane tab="Diagram Ogive" key="3">
+                    <LineChart
+                      data={CumulativeFreqDistData}
+                      xAxisKeyName="kelasLebihDari"
+                      lineDataKeys={[
                         "frekuensiLebihDari",
                         "persentasiFrekLebihDari",
                       ]}
