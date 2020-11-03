@@ -105,4 +105,4 @@ const CumulativeFreqDistTable = () => {
   return <Table bordered dataSource={data} columns={columns} />
 }
 
-export { CumulativeFreqDistTable }
+export { CumulativeFreqDistTable, data as CumulativeFreqDistData }
