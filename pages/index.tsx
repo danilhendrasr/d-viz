@@ -102,7 +102,12 @@ export default function Home({ records, recordValues }: HomeProps) {
                 />
               </TabPane>
               <TabPane tab="Diagram Lingkaran" key="2">
-                <PieChart />
+                <PieChart
+                  data={NormalFreqDistData}
+                  nameKey="interval"
+                  dataKeys={["frekuensi", "persentase"]}
+                  legendLabels={["Frekuensi", "Persentase"]}
+                />
               </TabPane>
               <TabPane tab="Diagram Ogive" key="3">
                 <LineChart
@@ -136,6 +141,17 @@ export default function Home({ records, recordValues }: HomeProps) {
                       labels={["Frekuensi", "Persentase"]}
                     />
                   </TabPane>
+                  <TabPane tab="Diagram Lingkaran" key="2">
+                    <PieChart
+                      data={CumulativeFreqDistData}
+                      nameKey="kelasKurangDari"
+                      dataKeys={[
+                        "frekuensiKurangDari",
+                        "persentasiFrekKurangDari",
+                      ]}
+                      legendLabels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
                   <TabPane tab="Diagram Ogive" key="3">
                     <LineChart
                       data={CumulativeFreqDistData}
@@ -160,6 +176,17 @@ export default function Home({ records, recordValues }: HomeProps) {
                         "persentasiFrekLebihDari",
                       ]}
                       labels={["Frekuensi", "Persentase"]}
+                    />
+                  </TabPane>
+                  <TabPane tab="Diagram Lingkaran" key="2">
+                    <PieChart
+                      data={CumulativeFreqDistData}
+                      nameKey="kelasLebihDari"
+                      dataKeys={[
+                        "frekuensiLebihDari",
+                        "persentasiFrekLebihDari",
+                      ]}
+                      legendLabels={["Frekuensi", "Persentase"]}
                     />
                   </TabPane>
                   <TabPane tab="Diagram Ogive" key="3">
