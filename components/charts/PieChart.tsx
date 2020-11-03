@@ -29,12 +29,12 @@ const PieChartVisualization = () => {
         <Legend
           payload={[
             {
-              value: "Persentase",
+              value: "Frekuensi",
               type: "circle",
               id: "ID01",
               color: "#5D737E",
             },
-            { value: "Frekuensi", type: "circle", id: "ID02", color: "#000" },
+            { value: "Persentase", type: "circle", id: "ID02", color: "#000" },
           ]}
         />
         <Tooltip />
