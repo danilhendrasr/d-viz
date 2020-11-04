@@ -1,9 +1,4 @@
-interface returnObject {
-  modus: number
-  frekuensiModus: number
-}
-
-function getMode(array: number[]): returnObject {
+function getMode(array: number[]): number {
   let currentModus: [number, number] = [0, 0]
   let counterObj: Record<number, number> = { 0: 0 }
   const distinctArray = new Set(array)
@@ -24,10 +19,9 @@ function getMode(array: number[]): returnObject {
     }
   }
 
-  return {
-    modus: currentModus[0],
-    frekuensiModus: currentModus[1],
-  }
+  const modus = currentModus[0]
+
+  return modus
 }
 
 export default getMode
