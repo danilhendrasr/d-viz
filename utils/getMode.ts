@@ -1,6 +1,6 @@
 interface returnObject {
-  nilaiModus: number
-  banyakMuncul: number
+  modus: number
+  frekuensiModus: number
 }
 
 function getMode(array: number[]): returnObject {
@@ -25,8 +25,8 @@ function getMode(array: number[]): returnObject {
   }
 
   return {
-    nilaiModus: currentModus[0],
-    banyakMuncul: currentModus[1],
+    modus: currentModus[0],
+    frekuensiModus: currentModus[1],
   }
 }
 
