@@ -15,6 +15,7 @@ import {
 } from "@/utils"
 import { NormalFreqDistData } from "@/components/freq-dist-tables/Normal"
 import { CumulativeFreqDistData } from "@/components/freq-dist-tables/Cumulative"
+import { getQuartiles } from "@/utils/quartiles"
 
 const { TabPane } = Tabs
 
@@ -45,6 +46,7 @@ export default function Home({ records, recordValues }: HomeProps) {
     recordValues
   )
   const median = getMedian(recordValues)
+  const { quartile1, quartile2, quartile3 } = getQuartiles(recordValues)
 
   return (
     <div className={styles["container"]}>
@@ -78,6 +80,9 @@ export default function Home({ records, recordValues }: HomeProps) {
         Modus: {modus}, muncul {frekuensiModus} kali
       </h2>
       <h2>Median: {median}</h2>
+      <h2>Kuartil 1: {quartile1}</h2>
+      <h2>Kuartil 2: {quartile2}</h2>
+      <h2>Kuartil 3: {quartile3}</h2>
 
       <h2 style={{ textAlign: "center", fontSize: "2.5em" }}>
         Tabel Distribusi Frekuensi dan Visualisasinya
